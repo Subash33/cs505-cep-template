@@ -35,8 +35,9 @@ public class Launcher {
         String outputStreamAttributesString = "count long";
 
         String queryString = " " +
-                "from " + inputStreamName +
-                " select count() as count " +
+                "from " + inputStreamName + "#window.timeBatch(10 sec) " +
+                " select remote_ip, avg(count()) as count " +
+		" group by remote_ip " +
                 "insert into " + outputStreamName + "; ";
 
         System.out.println(queryString);
