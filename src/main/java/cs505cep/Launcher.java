@@ -14,7 +14,7 @@ import java.net.URI;
 public class Launcher {
 
     public static final String API_SERVICE_KEY = "12331124"; //Change this to your student id
-    public static final int WEB_PORT = 9005;
+    public static final int WEB_PORT = 9000;
     public static String inputStreamName = null;
     public static long accessCount = -1;
 
@@ -35,9 +35,8 @@ public class Launcher {
         String outputStreamAttributesString = "count long";
 
         String queryString = " " +
-                "from " + inputStreamName + "#window.timeBatch(10 sec) " +
-                " select remote_ip, avg(count()) as count " +
-		" group by remote_ip " +
+                "from " + inputStreamName + "#window.time(10 sec) " +
+		" select convert(avg(count()) as long) as count " +
                 "insert into " + outputStreamName + "; ";
 
         System.out.println(queryString);
