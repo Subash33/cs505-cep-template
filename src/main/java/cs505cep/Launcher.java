@@ -36,7 +36,7 @@ public class Launcher {
 
         String queryString = " " +
                 "from " + inputStreamName + "#window.time(10 sec) " +
-		" select convert(avg(count()) as long) as count " +
+		" select convert(avg(count()), 'long')  as count " +
                 "insert into " + outputStreamName + "; ";
 
         System.out.println(queryString);
